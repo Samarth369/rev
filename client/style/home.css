@@ -1,0 +1,64 @@
+.main {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.heading {
+    font-family: "Itim", cursive;
+    font-weight: 400;
+    font-size: 6em;
+    font-style: normal;
+}
+
+.login {
+    border: 3px solid black;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin: 0px 0px 0px 50px;
+}
+
+.login h1 {
+    font-size: 3em;
+    margin: 0px 0px 20px 0px;
+}
+
+.login div {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0px;
+    font: 1.5em sans-serif;
+}
+
+.username input{
+    font: 1em sans-serif;
+    padding: 3px;
+    outline: none;
+    margin: 5px 0px 0px 0px;
+}
+
+.password input{
+    font: 1em sans-serif;
+    padding: 3px;
+    outline: none;
+    margin: 5px 0px 0px 0px;
+}
+
+.mail input{
+    font: 1em sans-serif;
+    padding: 3px;
+    outline: none;
+    margin: 5px 0px 0px 0px;
+}
+
+.link h1{
+    font: 0.8em sans-serif;
+    margin: 0px;
+    padding: 0%;
+}
+
+
+
