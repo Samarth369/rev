@@ -2,6 +2,16 @@ import { useState } from "react";
 import "../style/createrev.css";
 
 export default function Createrev() {
+
+    const [ header , setheader ] = useState("")
+    const [ mess , setmess ] = useState('')
+
+    // Ques
+    const [ name , setname ] = useState(false) 
+    const [ email , setemail ] = useState(false) 
+    const [ link , setlink ] = useState(false) 
+    const [ address , setaddress ] = useState(false) 
+
     const [lists, setlists] = useState([]);
 
     return (
@@ -19,25 +29,62 @@ export default function Createrev() {
                             </div>
 
                             <div className="header-block">
-                                <h1 className="header">here is your header</h1>
+                                <h1 className="header">{header == "" ? "here is your header" : header}</h1>
                             </div>
 
-                            <div className="mess-block">here is your mess...</div>
+                            <div className="mess-block">{mess == '' ? "here is your message..." : mess}</div>
 
                             <div className="ques">
-                                QUESTIONS
+                                {lists.length != 0 && 'QUESTIONS'}
                                 <ul className="ulist">
-                                    <li>
-                                        1qwe1qwe1qwe1qwe1qwe1qwe1qwe1qwe1qwe1qwe1qwe1qwe1qwe1qwe
-                                    </li>
-                                    <li>2qwe</li>
-                                    <li>3qwe</li>
+                                    {lists.map(x => <li>{x}</li>)}
                                 </ul>
                             </div>
 
+                            {name &&
+                            <div className="optio">
+                                <div className="optio-in">
+                                    Name <input type="text" />
+                                </div>
+                            </div>}
+
+
+                            {email &&
+                            <div className="optio">
+                                <div className="optio-in">
+                                    Email <input type="text" />
+                                </div>
+                            </div>}
+
+
+                            {link &&
+                            <div className="optio">
+                                <div className="optio-in">
+                                    Social link <input type="text" />
+                                </div>
+                            </div>}
+
+
+                            {address &&
+                            <div className="optio">
+                                <div className="optio-in">
+                                    Address <input type="text" />
+                                </div>
+                            </div>}
+
+
                             <div className="rev-btn">
-                                <button type="button">Record a video</button>
-                                <button type="button">Send text</button>
+                                
+                                <label htmlFor="videorev">
+                                    <div>Record Video</div>
+                                </label>
+                                    <input type="file" name="videorev" id="videorev" />
+
+                                <label htmlFor="photorev">
+                                    <div>Upload Photo</div>
+                                </label>
+                                    <input type="file" name="photorev" id="photorev" />
+
                             </div>
                         </div>
                     </div>
@@ -71,7 +118,9 @@ export default function Createrev() {
                         <div className="headertitle">
                             <div className="headertitle-in">
                                 Header tite
-                                <input type="text" />
+                                <input type="text" onChange={(e) => {
+                                    setheader(e.target.value);
+                                }}/>
                             </div>
                         </div>
 
@@ -79,7 +128,9 @@ export default function Createrev() {
                         <div className="cmess">
                             <div className="cmess-in">
                                 Your custom message
-                                <textarea name="custommessage" id="custommessage"></textarea>
+                                <textarea name="custommessage" id="custommessage" onChange={(e) => {
+                                    setmess(e.target.value);
+                                }}></textarea>
                             </div>
                         </div>
 
@@ -138,10 +189,22 @@ export default function Createrev() {
                             <div className="cinfo-in">
                                 Collect extra information
                                 <div className="chose">
-                                    <div className="chose1  opti"><input type="checkbox" /> Name </div>    
-                                    <div className="chose2  opti"><input type="checkbox" /> Email </div>    
-                                    <div className="chose3  opti"><input type="checkbox" /> Social link </div>    
-                                    <div className="chose4  opti"><input type="checkbox" /> Address </div>    
+                                    <div className="chose1  opti"><input type="checkbox" onChange={(e) => {
+                                        setname(e.target.checked);
+                                    }}/> Name </div>
+
+                                    <div className="chose2  opti"><input type="checkbox" onChange={(e) => {
+                                        setemail(e.target.checked);
+                                    }}/> Email </div>
+
+                                    <div className="chose3  opti"><input type="checkbox" onChange={(e) => {
+                                        setlink(e.target.checked);
+                                    }}/> Social link </div>
+
+                                    <div className="chose4  opti"><input type="checkbox" onChange={(e) => {
+                                        setaddress(e.target.checked);
+                                    }}/> Address </div>
+
                                 </div>
                             </div>
                         </div>

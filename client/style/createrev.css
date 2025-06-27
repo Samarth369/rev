@@ -44,6 +44,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow-wrap: anywhere;
 }
 
 .mess-block {
@@ -69,14 +70,16 @@
     flex-direction: column;
 }
 
-.rev-btn button {
-    color: aliceblue;
-    background-color: blue;
-    font-weight: 700;
+.rev-btn div {
+    padding: 5px 10px;
     margin: 5px 0px;
-    padding: 5px;
-    border: none;
+    background-color: blue;
+    color: aliceblue;
+    font: 1em sans-serif;
+    font-weight: 600;
     border-radius: 5px;
+    display: flex;
+    justify-content: center;
 }
 
 .costom {
@@ -253,4 +256,34 @@
     background-color: blue;
     font: 1em sans-serif;
     color: aliceblue;
+}
+
+.optio {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.optio-in {
+    width: 80%;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.optio-in input {
+    padding: 5px;
+    border: 1px solid gainsboro;
+    border-radius: 4px;
+    font: 1em sans-serif;
+    outline: none;
+    margin: 3px 0px 0px 0px;
+}
+
+#videorev {
+    display: none;
+}
+
+#photorev {
+    display: none;
 }
