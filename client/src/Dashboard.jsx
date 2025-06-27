@@ -10,7 +10,6 @@ export default function Dashboard () {
                     
                     <div className="spacebtn">
                         <h1>Space</h1>
-                        
                         <button>new Space</button>
                     </div>
 

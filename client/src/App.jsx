@@ -4,6 +4,7 @@ import { BrowserRouter , Routes , Route } from "react-router-dom"
 
 import Home from './Home'
 import Dashboard from './Dashboard'
+import Createrev from './Createrev'
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/createrev' element={<Createrev />} />
       </Routes>
       </BrowserRouter>
     </>
