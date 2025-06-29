@@ -1,6 +1,17 @@
+import { useEffect } from "react";
 import "../style/dashboard.css";
+import { useNavigate } from 'react-router-dom'
 
 export default function Dashboard () {
+
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        let istoken = localStorage.getItem("Token")
+        if(!istoken) {
+            navigate('/')
+        }        
+    } , [])
 
     function Space () {
         return (
@@ -10,7 +21,7 @@ export default function Dashboard () {
                     
                     <div className="spacebtn">
                         <h1>Space</h1>
-                        <button>new Space</button>
+                        <button onClick={() => {navigate('/createrev')}}>new Space</button>
                     </div>
 
                     <div className="spacespace">

@@ -3,7 +3,7 @@ const routes = express.Router()
 const userdb = require('../modules/user')
 const bcrypt = require("bcrypt")
 const jwt = require('jsonwebtoken')
-const ENV = require("../env")
+const ENV = require("../env/env")
 
 
 
