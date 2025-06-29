@@ -4,14 +4,12 @@ const userdb = require('../modules/user')
 const bcrypt = require("bcrypt")
 const jwt = require('jsonwebtoken')
 const ENV = require("../env/env")
-const multer  = require('multer')
-const storage = multer.memoryStorage()
-const upload = multer({ storage: storage })
 
 
-revroutes.post( '/createrev' , upload.single('logo') , async function ( req , res ) {
-    const { livepage , spacename , token , img } = req.body
-    console.log(img);
+
+revroutes.post( '/createrev' , async function ( req , res ) {
+    const { livepage , spacename , token } = req.body
+    console.log(req.body);
     
     let userid;
 

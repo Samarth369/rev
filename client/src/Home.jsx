@@ -33,7 +33,7 @@ export default function Home () {
             .then(res => {
                 return res.json()
             })
-            .then(res => {
+            .then(res => {                
                 localStorage.setItem("Token" , res.token)
             })
         }
