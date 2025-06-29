@@ -1,7 +1,11 @@
 import { useState } from 'react'
 import '../style/home.css'
+import { useNavigate } from "react-router-dom"
 
 export default function Home () {
+
+    const navigate = useNavigate()
+
     const [ userin , setuserin ] = useState(true);
 
     function Login () {
@@ -48,7 +52,7 @@ export default function Home () {
                     Password : <input type="password" name='password'/>
                 </div>
 
-                <button>login</button>
+                <button onClick={() => {navigate('/createrev')}}>login</button>
                 
                 <div className="link" onClick={() => setuserin(x => !x)}><h1>Signup here</h1></div>
             </div>

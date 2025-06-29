@@ -14,9 +14,12 @@ const usersvhema = mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+    ref: {
+        type: Array
     }
 })
 
-const userdb     = mongoose.model("user",usersvhema)
+const userdb = mongoose.model("user",usersvhema)
 
 module.exports = userdb;

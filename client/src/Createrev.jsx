@@ -1,28 +1,62 @@
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import "../style/createrev.css";
+import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Createrev() {
+
+    const navigate = useNavigate()
 
     const [ header , setheader ] = useState("")
     const [ mess , setmess ] = useState('')
 
+    const [ imgsrc , setimgsrc ] = useState("https://testimonial.to/static/media/just-logo.040f4fd2.svg")
+
     // Ques
+    const [ spacename , setspacename ] = useState("") 
     const [ name , setname ] = useState(false) 
     const [ email , setemail ] = useState(false) 
     const [ link , setlink ] = useState(false) 
     const [ address , setaddress ] = useState(false) 
 
     const [lists, setlists] = useState([]);
+    const [ imgarr , setimgarr ] = useState()
+
+    const liveref = useRef()
+
+    useEffect(() => {
+            let istoken = localStorage.getItem("Token")
+            if(!istoken) {
+                navigate('/')
+            }                                
+    } , [])
+    
+    function createrev () {
+        fetch("http://localhost:3000/createrev" , {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                livepage: liveref.current.innerHTML,
+                spacename: spacename,
+                token: localStorage.getItem("Token"), 
+                img: imgarr  
+            })
+        })
+        .then(res => res.json()).then(res => console.log(res))
+    }
+    
 
     return (
         <>
             <div className="createrev-block">
-                <form className="createrev">
-                    <div className="livepage">
-                        <div className="mainpage">
+                <form className="createrev" encType="multipart/form-data">
+                    <div className="livepage" >
+                        <div className="mainpage" ref={liveref}>
                             <div className="img-block">
                                 <img
-                                    src="https://testimonial.to/static/media/just-logo.040f4fd2.svg"
+                                    src={imgsrc}
                                     alt=""
                                     width={110}
                                 />
@@ -100,7 +134,7 @@ export default function Createrev() {
                         <div className="spacename">
                             <div className="spacename-in">
                                 Space name
-                                <input type="text" />
+                                <input type="text" onChange={(e) => {setspacename(e.target.value)}}/>
                             </div>
                         </div>
 
@@ -110,7 +144,17 @@ export default function Createrev() {
                                 <label htmlFor="logo">
                                     <div className="logodiv">Space logo</div>
                                 </label>
-                                <input type="file" name="logo" id="logo" />
+                                <input type="file" name="logo" id="logo" onChange={async (e) => {
+                                    const file = e.target.files[0];
+                                    let array8file = await file.arrayBuffer();
+                                    let unit8arr = new Uint8Array(array8file);
+                                    setimgarr([ unit8arr , file.type ])
+                                    
+                                    if (file) {
+                                      const imageUrl = URL.createObjectURL(file);
+                                      setimgsrc(imageUrl);
+                                    }
+                                }}/>
                             </div>
                         </div>
 
@@ -211,7 +255,7 @@ export default function Createrev() {
 
 
                         <div className="createspacebtn">
-                            <button type="button">Create Space</button>
+                            <button type="button" onClick={createrev}>Create Space</button>
                         </div>
                     </div>
                 </form>
