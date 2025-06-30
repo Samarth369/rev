@@ -1,0 +1,30 @@
+.revpageg {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.revpageg form {
+    width: 80%;
+    border: 2px solid black;
+    border-radius: 30px;
+    padding: 10px 20px 0px 20px;
+}
+
+.revbtn {
+    display: flex;
+    justify-content: center;
+}
+
+.revbtn button {
+    padding: 5px 15px;
+    border: none;
+    border-radius: 8px;
+    color: aliceblue;
+    background-color: blue;
+    font: 1em sans-serif;
+    font-weight: 600;
+    margin: 10px 0px;
+}

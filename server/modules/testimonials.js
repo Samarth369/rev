@@ -10,15 +10,12 @@ const rev = mongoose.Schema({
         type: String,
         required: true,
     },
-    imgbuff: {
-        type: String
-    },
     owner: {
         type: String,
         required: true
     }
 })
 
-const revdb = mongoose.model("rev",revdb)
+const revdb = mongoose.model("rev",rev)
 
 module.exports = revdb

@@ -1,6 +1,7 @@
 const express = require("express")
 const routes = express.Router()
 const userdb = require('../modules/user')
+const revdb = require('../modules/testimonials')
 const bcrypt = require("bcrypt")
 const jwt = require('jsonwebtoken')
 const ENV = require("../env/env")
@@ -60,13 +61,20 @@ routes.post( '/login' , async function ( req , res ) {
 
 routes.get( '/getdb' , async function ( req , res ) {
     const db = await userdb.find({})
-    res.json(db)
+    const redb = await revdb.find({})
+
+    res.json({ db , redb })
 })
 
+routes.get( '/clearevdb' , async function ( req , res ) {
+    await revdb.deleteMany({})
+    res.send("DB cleared")
+})
 
-
-routes.post( '/cleardb' , async function ( req , res ) {
+routes.get( '/cleardb' , async function ( req , res ) {
     await userdb.deleteMany({})
+    await revdb.deleteMany({})
+    
     res.send("DB cleared")
 })
 

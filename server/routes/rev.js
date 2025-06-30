@@ -1,6 +1,7 @@
 const express = require("express")
 const revroutes = express.Router()
 const userdb = require('../modules/user')
+const revdb = require('../modules/testimonials')
 const bcrypt = require("bcrypt")
 const jwt = require('jsonwebtoken')
 const ENV = require("../env/env")
@@ -9,7 +10,6 @@ const ENV = require("../env/env")
 
 revroutes.post( '/createrev' , async function ( req , res ) {
     const { livepage , spacename , token } = req.body
-    console.log(req.body);
     
     let userid;
 
@@ -23,17 +23,28 @@ revroutes.post( '/createrev' , async function ( req , res ) {
         }
     })
 
-    // const user = await userdb.updateOne(
-    //     {_id: userid},
-    //     {$push: {ref: "8743568w7346f587w34698756378456"}}
-    // )
+    let rev = await revdb.create({
+        spacename: spacename,
+        htmlcontent: livepage,
+        owner: userid
+    })
+
+    let asd = await userdb.updateOne( 
+        {_id: userid} ,
+        {$push: {ref: rev._id.toString()}}
+    )
 })
 
-revroutes.get( '/form' , function ( req , res ) {
-    console.log(req.body);
+revroutes.post( "/getrev" , async function ( req , res ) {
+    const { id } = req.body
 
-    res.send('asdad')
-    
+    let page = await revdb.findOne({_id: id})
+
+    if ( page ) {
+        res.json(page)
+    } else {
+        res.send("na na na")
+    }
 })
  
 
