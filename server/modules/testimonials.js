@@ -13,6 +13,9 @@ const rev = mongoose.Schema({
     owner: {
         type: String,
         required: true
+    },
+    responce: {
+        type: Array
     }
 })
 

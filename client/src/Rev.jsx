@@ -43,14 +43,20 @@ export default function Rev () {
 
     function formsub (e) {
         e.preventDefault()
-        console.log(e.target);
+        let formdata = new FormData(e.target)
+        formdata.append("id",id)
+
+        fetch("http://localhost:3000/revresponce" , {
+            method:"POST",
+            body: formdata
+        })
     }
 
 
     return (
         <>
         <div className="revpageg">
-        <form onSubmit={formsub}>
+        <form onSubmit={formsub} encType="multipart/form-data">
             <Content />
             <div className="revbtn"><button>Send</button></div>
         </form>
