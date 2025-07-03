@@ -75,7 +75,7 @@ export default function Createrev() {
                             {name &&
                             <div className="optio">
                                 <div className="optio-in">
-                                    Name <input type="text" />
+                                    Name <input type="text" name="name"/>
                                 </div>
                             </div>}
 
@@ -83,7 +83,7 @@ export default function Createrev() {
                             {email &&
                             <div className="optio">
                                 <div className="optio-in">
-                                    Email <input type="text" />
+                                    Email <input type="text" name="mail"/>
                                 </div>
                             </div>}
 
@@ -91,7 +91,7 @@ export default function Createrev() {
                             {link &&
                             <div className="optio">
                                 <div className="optio-in">
-                                    Social link <input type="text" />
+                                    Social link <input type="text" name="sociallink"/>
                                 </div>
                             </div>}
 
@@ -99,17 +99,12 @@ export default function Createrev() {
                             {address &&
                             <div className="optio">
                                 <div className="optio-in">
-                                    Address <input type="text" />
+                                    Address <input type="text" name="address"/>
                                 </div>
                             </div>}
 
 
                             <div className="rev-btn">
-                                
-                                <label htmlFor="videorev">
-                                    <div>Record Video</div>
-                                </label>
-                                    <input type="file" name="videorev" id="videorev" />
 
                                 <label htmlFor="photorev">
                                     <div>Upload Photo</div>

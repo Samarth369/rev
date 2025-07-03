@@ -6,6 +6,7 @@ import Home from './Home'
 import Dashboard from './Dashboard'
 import Createrev from './Createrev'
 import Rev from './Rev'
+import State from './Stats'
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/createrev' element={<Createrev />} />
         <Route path='/rev/:id' element={<Rev />} />
+        <Route path='/state' element={<State />} />
       </Routes>
       </BrowserRouter>
     </>

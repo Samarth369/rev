@@ -66,10 +66,14 @@ routes.get( '/getdb' , async function ( req , res ) {
     res.json({ db , redb })
 })
 
+
+
 routes.get( '/clearevdb' , async function ( req , res ) {
     await revdb.deleteMany({})
     res.send("DB cleared")
 })
+
+
 
 routes.get( '/cleardb' , async function ( req , res ) {
     await userdb.deleteMany({})
@@ -77,5 +81,7 @@ routes.get( '/cleardb' , async function ( req , res ) {
     
     res.send("DB cleared")
 })
+
+
 
 module.exports = routes
