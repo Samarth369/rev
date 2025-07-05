@@ -12,12 +12,17 @@ const upload = multer({ storage: storage })
 
 revroutes.post( '/createrev' , async function ( req , res ) {
     const { livepage , spacename , token } = req.body
+
+    if ( !spacename ) {
+        return res.json({
+            res: "no space name"
+        })
+    }
     
     let userid;
 
     jwt.verify( token , ENV.SRC , function ( err , decoded ) {
         if ( err ) {
-            console.log("400");
             return res.sendStatus(400)
         }
         if ( decoded ) {
@@ -31,9 +36,15 @@ revroutes.post( '/createrev' , async function ( req , res ) {
         owner: userid
     })
 
+    if ( rev ) {
+        res.json({
+            res: "created rev"
+        })
+    }
+
     let asd = await userdb.updateOne( 
         {_id: userid} ,
-        {$push: {ref: rev._id.toString()}}
+        {$push: {ref: [rev._id.toString() , spacename]}}
     )
 })
 
@@ -42,11 +53,12 @@ revroutes.post( '/createrev' , async function ( req , res ) {
 revroutes.post( "/delrev" , async function ( req , res ) {
     const { id } = req.body
 
-    let tempuser = await revdb.findOne({_id: id})
+    let tempuser = await revdb.findOne({_id: id[0]})
+    
     let owner = tempuser.owner
      
     await userdb.updateOne({_id: owner} , {$pull: {ref: id}})
-    await revdb.deleteOne({_id: id})
+    await revdb.deleteOne({_id: id[0]})
 })
 
 
@@ -58,9 +70,7 @@ revroutes.post( "/getrev" , async function ( req , res ) {
 
     if ( page ) {
         res.json(page)
-    } else {
-        res.send("na na na")
-    }
+    } 
 })
  
 
@@ -69,35 +79,38 @@ revroutes.post( "/revresponce" , upload.fields([{ name: 'photorev' , maxCount: 1
     const { name , mail , sociallink , address , id } = req.body
     const responce = {}
     
+    
     if (name) {
         responce.name = name
-    }
-
+    } 
+     
+    
     if (mail) {
         responce.mail = mail
-    }
-
+    } 
+     
+    
     if (sociallink) {
         responce.sociallink = sociallink
-    }
-
+    } 
+     
+    
     if (address) {
         responce.address = address
-    }
+    } 
     
-    let img = req.files.photorev[0]
-    
-    if ( img ) {
-        responce.img = [ img.mimetype , img.buffer ]
-    }
-    
+    try{
+        let img = req.files.photorev[0]
+        if ( img ) {
+            responce.img = [ img.mimetype , img.buffer ]
+        }
+    } 
+    catch{}
 
     let asd = await revdb.updateOne(
         {_id: id},
         {$push: {responce: responce}}
     )
-
-    console.log(asd);  
 })
 
 

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useRef } from 'react';
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { BrowserRouter, useParams } from 'react-router-dom';
 
 import '../style/rev.css'
 
@@ -58,7 +58,9 @@ export default function Rev () {
         <div className="revpageg">
         <form onSubmit={formsub} encType="multipart/form-data">
             <Content />
-            <div className="revbtn"><button>Send</button></div>
+            <div className="revbtn"><button onClick={() => {
+                alert("Thank you for responce")
+            }}>Send</button></div>
         </form>
         </div>
         </>

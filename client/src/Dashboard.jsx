@@ -24,14 +24,10 @@ export default function Dashboard () {
                 token: localStorage.getItem("Token")
             })})
             .then( res => res.json() )
-            .then(res => setlist(res.link))
+            .then(res => {
+                setlist(res.link)
+            })
     } , [])
-
-    function del () {
-        // console.log(id);
-        console.log("SDfsdf");
-        
-    }
 
     function Space () {
         return (
@@ -46,14 +42,15 @@ export default function Dashboard () {
 
                     <div className="spacespace">
                         <ul>
-                            {list.map( x => {
+                            {list.map( ( x , idx ) => {
+                                
                                 return (
                                     <>
                                     <li>
                                         <div>
-                                            <div className="space-name">space name</div>
+                                            <div className="space-name">{x[1]}</div>
                                             <div className="link-space">
-                                                <div className="link"><a href={`http://localhost:5173/rev/${x}`}>http://localhost:5173/rev/{x}</a></div>
+                                                <div className="link"><a href={`http://localhost:5173/rev/${x[0]}`}>http://localhost:5173/rev/{x[0]}</a></div>
 
                                                 <button onClick={ () => {
                                                     navigate('/state' , {state: x})
@@ -69,6 +66,9 @@ export default function Dashboard () {
                                                             id: x
                                                         })
                                                     })
+
+                                                    let newlist = list.filter((_, i) => i !== idx);
+                                                    setlist(newlist)
                                                 }}>Del</button>
                                             </div>
                                         </div>

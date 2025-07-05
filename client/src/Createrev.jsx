@@ -17,9 +17,11 @@ export default function Createrev() {
     const [ link , setlink ] = useState(false) 
     const [ address , setaddress ] = useState(false) 
 
-    const [lists, setlists] = useState([]);
+    const [lists, setlists] = useState([]);    
  
     const liveref = useRef()
+    const spacenameref = useRef()
+    const headerref = useRef()
 
     useEffect(() => {
             let istoken = localStorage.getItem("Token")
@@ -47,7 +49,14 @@ export default function Createrev() {
                 token: localStorage.getItem("Token"),
             })
         })
-        .then(res => res.json()).then(res => console.log(res))
+        .then(res => res.json())
+        .then(res => {
+            if ( res.res == "no space name") {
+                spacenameref.current.style.border = "2px solid red"
+            } else if ( res.res == "created rev") {
+                navigate('/dashboard')
+            }
+        })
     }
     
 
@@ -126,7 +135,7 @@ export default function Createrev() {
                         <div className="spacename">
                             <div className="spacename-in">
                                 Space name
-                                <input type="text" onChange={(e) => {setspacename(e.target.value)}}/>
+                                <input type="text" ref={spacenameref} onFocus={() => {spacenameref.current.style.border = "1px solid gray"}} onChange={(e) => {setspacename(e.target.value)}}/>
                             </div>
                         </div>
 
@@ -134,9 +143,7 @@ export default function Createrev() {
                         <div className="headertitle">
                             <div className="headertitle-in">
                                 Header tite
-                                <input type="text" onChange={(e) => {
-                                    setheader(e.target.value);
-                                }}/>
+                                <input type="text" onChange={(e) => { setheader(e.target.value) }} ref={headerref} onFocus={() => {headerref.current.style.border = "1px solid gray"}} />
                             </div>
                         </div>
 
@@ -227,7 +234,9 @@ export default function Createrev() {
 
 
                         <div className="createspacebtn">
-                            <button onClick={createrev} type="button">Create Space</button>
+                            <button onClick={() => {
+                                createrev();
+                            }} type="button">Create Space</button>
                         </div>
                     </div>
                 </form>

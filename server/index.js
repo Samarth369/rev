@@ -7,7 +7,7 @@ const revroutes = require("./routes/rev")
 const dash = require('./routes/dashboard')
 const state = require('./routes/state')
 
-mongoose.connect("mongodb://localhost:27017/rev").then(console.log("connected"))
+mongoose.connect("mongodb://localhost:27017/rev")
 
 const app = express()
 app.use(cors())

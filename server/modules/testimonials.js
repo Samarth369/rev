@@ -4,7 +4,6 @@ const rev = mongoose.Schema({
     spacename: {
         type:String,
         required: true,
-        unique: true
     },
     htmlcontent: {
         type: String,
