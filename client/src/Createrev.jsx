@@ -7,6 +7,9 @@ export default function Createrev() {
 
     const navigate = useNavigate()
 
+    const [ dp , setdp ] = useState(`https://github.com/Samarth369/rev/blob/main/upload`)
+    const [ file , setfile ] = useState()
+
     const [ header , setheader ] = useState("")
     const [ mess , setmess ] = useState('')
 
@@ -36,18 +39,26 @@ export default function Createrev() {
         function formsub (e) {
             e.preventDefault()
         }
+
+        // JSON.stringify({
+        //         livepage: liveref.current.innerHTML,
+        //         spacename: spacename,
+        //         token: localStorage.getItem("Token"),
+        //         dp: file
+        //     })
         
         function createrev () {
+            let form = new FormData()
+            form.append( "livepage" , liveref.current.innerHTML )            
+            form.append( "spacename" , spacename )            
+            form.append( "token" , localStorage.getItem("Token") )
+            form.append( "file" , file)            
         fetch("http://localhost:3000/createrev" , {
             method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body : JSON.stringify({
-                livepage: liveref.current.innerHTML,
-                spacename: spacename,
-                token: localStorage.getItem("Token"),
-            })
+            // headers: {
+            //     'Content-Type': 'application/json',
+            // },
+            body : form
         })
         .then(res => res.json())
         .then(res => {
@@ -66,7 +77,10 @@ export default function Createrev() {
                 <form className="createrev" encType="multipart/form-data" onSubmit={formsub}>
                     <div className="livepage" >
                         <div className="mainpage" ref={liveref}>
-                            
+
+                            <div className="img-block">
+                                <img src={dp} alt="" className="dp-img" width={130}/>
+                            </div>
 
                             <div className="header-block">
                                 <h1 className="header">{header == "" ? "here is your header" : header}</h1>
@@ -110,7 +124,7 @@ export default function Createrev() {
                                 <div className="optio-in">
                                     Address <input type="text" name="address"/>
                                 </div>
-                            </div>}
+                            </div>}     
 
 
                             <div className="rev-btn">
@@ -131,7 +145,6 @@ export default function Createrev() {
                             <h1>Create Space</h1>
                         </div>
 
-
                         <div className="spacename">
                             <div className="spacename-in">
                                 Space name
@@ -139,6 +152,15 @@ export default function Createrev() {
                             </div>
                         </div>
 
+                        <div className="cdp">
+                            <label htmlFor="img-dp">Change img</label> 
+                            <input type="file" name="img-dp" id="img-dp" onChange={(e) => {
+                                setfile(e.target.files[0])
+                                const imageUrl = URL.createObjectURL(e.target.files[0]);
+                                setdp(imageUrl);                                
+                            }}/> 
+                            {/* <input type="number" max={500} min={100}/> */}
+                        </div>
 
                         <div className="headertitle">
                             <div className="headertitle-in">

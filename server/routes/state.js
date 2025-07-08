@@ -7,19 +7,19 @@ const ENV = require('../env/env')
 const state = express.Router()
 
 state.post( '/getstates' , async function ( req , res ) {
-    const { revid , token } = req.body
+    const { revid , token } = req.body    
 
-    let rev = await revdb.findOne({_id: revid})
+    let rev = await revdb.findOne({_id: revid[0]})
 
     jwt.verify( token , ENV.SRC , function ( err , decode ) {
         if ( err ) {
-            res.json({
+            return res.json({
                 res : "there is a err in json"
             })            
         }
 
-        if ( decode == rev.owner ) {
-            res.json({
+        if ( decode == rev.owner ) {            
+            return res.json({
                 data: rev.responce
             })
         }

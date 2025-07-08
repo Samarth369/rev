@@ -58,7 +58,7 @@
 
 .ulist {
     /* border: 1px solid black; */
-    margin: 10px 0px 50px 15px;
+    margin: 10px 0px 20px 15px;
 }
 
 .ulist li {
@@ -130,6 +130,24 @@
 
 #logo {
     display: none;
+}
+
+.cdp {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}   
+
+#img-dp {
+    display: none;
+}
+
+.cdp label {
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 3px 5px ;
+    margin: 10px;
 }
 
 .logodiv {

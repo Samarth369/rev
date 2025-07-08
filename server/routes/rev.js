@@ -10,9 +10,10 @@ const storage = multer.memoryStorage()
 const upload = multer({ storage: storage })
 
 
-revroutes.post( '/createrev' , async function ( req , res ) {
+revroutes.post( '/createrev' , upload.single("file") , async function ( req , res ) {
     const { livepage , spacename , token } = req.body
-
+    console.log(req.file);
+    
     if ( !spacename ) {
         return res.json({
             res: "no space name"
@@ -106,6 +107,7 @@ revroutes.post( "/revresponce" , upload.fields([{ name: 'photorev' , maxCount: 1
         }
     } 
     catch{}
+
 
     let asd = await revdb.updateOne(
         {_id: id},

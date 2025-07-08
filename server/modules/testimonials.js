@@ -2,8 +2,11 @@ const mongoose = require("mongoose")
 
 const rev = mongoose.Schema({
     spacename: {
-        type:String,
+        type: String,
         required: true,
+    },
+    dp: {
+        type: Array
     },
     htmlcontent: {
         type: String,

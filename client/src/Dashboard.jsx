@@ -38,7 +38,12 @@ export default function Dashboard () {
                     <div className="spacebtn">
                         <h1>Space</h1>
                         <button onClick={() => {navigate('/createrev')}}>new Space</button>
+                        <button onClick={() => {
+                            localStorage.removeItem("Token")
+                            navigate('/')
+                        }}>Log out</button>
                     </div>
+
 
                     <div className="spacespace">
                         <ul>
