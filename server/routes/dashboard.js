@@ -13,8 +13,7 @@ dash.post( '/dash' , async function ( req , res ) {
 
     let userid = jwt.verify( token , ENV.SRC , )
 
-    let user = await userdb.findOne({_id: userid})
-    
+    let user = await userdb.findOne({_id: userid})    
     res.json({
         link: user.ref 
     })

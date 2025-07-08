@@ -12,7 +12,6 @@ const upload = multer({ storage: storage })
 
 revroutes.post( '/createrev' , upload.single("file") , async function ( req , res ) {
     const { livepage , spacename , token } = req.body
-    console.log(req.file);
     
     if ( !spacename ) {
         return res.json({
@@ -21,7 +20,7 @@ revroutes.post( '/createrev' , upload.single("file") , async function ( req , re
     }
     
     let userid;
-
+    
     jwt.verify( token , ENV.SRC , function ( err , decoded ) {
         if ( err ) {
             return res.sendStatus(400)
@@ -31,22 +30,42 @@ revroutes.post( '/createrev' , upload.single("file") , async function ( req , re
         }
     })
 
-    let rev = await revdb.create({
-        spacename: spacename,
-        htmlcontent: livepage,
-        owner: userid
-    })
+    const dp = req.file
 
-    if ( rev ) {
-        res.json({
-            res: "created rev"
+    if ( dp ) {   
+        let rev = await revdb.create({
+            spacename: spacename,
+            htmlcontent: livepage,
+            owner: userid,
+            dp : [ dp.mimetype , dp.buffer ]
         })
+        
+        if ( rev ) {
+            res.json({
+                res: "created rev"
+            })
+        }    
+        let asd = await userdb.updateOne( 
+            {_id: userid} ,
+            {$push: {ref: [rev._id.toString() , spacename]}}
+        )
+    } else {
+        let rev = await revdb.create({
+            spacename: spacename,
+            htmlcontent: livepage,
+            owner: userid,
+        })
+        
+        if ( rev ) {
+            res.json({
+                res: "created rev"
+            })
+        }    
+        let asd = await userdb.updateOne( 
+            {_id: userid} ,
+            {$push: {ref: [rev._id.toString() , spacename]}}
+        )
     }
-
-    let asd = await userdb.updateOne( 
-        {_id: userid} ,
-        {$push: {ref: [rev._id.toString() , spacename]}}
-    )
 })
 
 

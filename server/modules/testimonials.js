@@ -6,7 +6,7 @@ const rev = mongoose.Schema({
         required: true,
     },
     dp: {
-        type: Array
+        type: Array,
     },
     htmlcontent: {
         type: String,

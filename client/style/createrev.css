@@ -132,6 +132,13 @@
     display: none;
 }
 
+.rimg {
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 3px 5px ;
+    background: none;
+}
+
 .cdp {
     display: flex;
     flex-direction: column;

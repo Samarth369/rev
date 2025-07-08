@@ -7,14 +7,15 @@ export default function Createrev() {
 
     const navigate = useNavigate()
 
-    const [ dp , setdp ] = useState(`https://github.com/Samarth369/rev/blob/main/upload`)
+    const [ dp , setdp ] = useState(`https://raw.githubusercontent.com/Samarth369/rev/refs/heads/main/upload/image.png`)
     const [ file , setfile ] = useState()
+    const [ removeing , setremoveimg ] = useState(false)
 
     const [ header , setheader ] = useState("")
     const [ mess , setmess ] = useState('')
 
     // Ques
-    const [ spacename , setspacename ] = useState("") 
+    const [ spacename , setspacename ] = useState("")   
     const [ name , setname ] = useState(false) 
     const [ email , setemail ] = useState(false) 
     const [ link , setlink ] = useState(false) 
@@ -39,25 +40,19 @@ export default function Createrev() {
         function formsub (e) {
             e.preventDefault()
         }
-
-        // JSON.stringify({
-        //         livepage: liveref.current.innerHTML,
-        //         spacename: spacename,
-        //         token: localStorage.getItem("Token"),
-        //         dp: file
-        //     })
         
         function createrev () {
             let form = new FormData()
             form.append( "livepage" , liveref.current.innerHTML )            
             form.append( "spacename" , spacename )            
             form.append( "token" , localStorage.getItem("Token") )
-            form.append( "file" , file)            
-        fetch("http://localhost:3000/createrev" , {
+
+            if ( removeing ) {
+                form.append( "file" , file)           
+            }
+
+            fetch("http://localhost:3000/createrev" , {
             method: "POST",
-            // headers: {
-            //     'Content-Type': 'application/json',
-            // },
             body : form
         })
         .then(res => res.json())
@@ -69,7 +64,8 @@ export default function Createrev() {
             }
         })
     }
-    
+
+    useEffect(() =>{} , [] )
 
     return (
         <>
@@ -78,9 +74,11 @@ export default function Createrev() {
                     <div className="livepage" >
                         <div className="mainpage" ref={liveref}>
 
+                            {removeing
+                            &&
                             <div className="img-block">
                                 <img src={dp} alt="" className="dp-img" width={130}/>
-                            </div>
+                            </div>}
 
                             <div className="header-block">
                                 <h1 className="header">{header == "" ? "here is your header" : header}</h1>
@@ -159,7 +157,8 @@ export default function Createrev() {
                                 const imageUrl = URL.createObjectURL(e.target.files[0]);
                                 setdp(imageUrl);                                
                             }}/> 
-                            {/* <input type="number" max={500} min={100}/> */}
+
+                            {removeing ? <button className="rimg" onClick={() => {setremoveimg(false)}}>Remove img</button> : <button className="rimg" onClick={() => {setremoveimg(true)}}>Add img</button>}
                         </div>
 
                         <div className="headertitle">

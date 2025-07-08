@@ -13,6 +13,13 @@ export default function Rev () {
 
     const [ html , sethtml ] = useState()
 
+    function imgurl ( dp ) {
+        let imgurl = `data:${dp[0]};base64,${dp[1]}`
+        divref.current.children[0].children[0].src = imgurl
+        divref.current.children[0].children[0].width = '300'
+        divref.current.children[0].style.height = "auto"
+    }
+
     useEffect( () => {
         fetch('http://localhost:3000/getrev' , {
             method:"POST",
@@ -26,11 +33,12 @@ export default function Rev () {
         .then(res => {
             let content = res.htmlcontent
             divref.current.innerHTML = content
+            imgurl(res.dp)
         })
     } , [])
 
 
-    function Content () {
+    function Content () {        
         return (
             <>
             <div ref={divref}>
@@ -60,7 +68,8 @@ export default function Rev () {
             <Content />
             <div className="revbtn"><button onClick={() => {
                 alert("Thank you for responce")
-            }}>Send</button></div>
+            }}
+            >Send</button></div>
         </form>
         </div>
         </>
