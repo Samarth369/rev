@@ -1,13 +1,6 @@
 # 🌀 Rev — MERN Stack Web App
 
-Rev is a full-stack web application built using the MERN stack (MongoDB, Express.js, React.js, Node.js). It enables users to [briefly explain what the app does, e.g., "create and manage notes", "track tasks", "share blogs", etc.].
-
----
-
-## 🔗 Live Demo
-
-[👉 Click here to view the live app](https://your-deployed-link.com)  
-*(Replace with your deployed frontend link)*
+Rev is a full-stack web application built using the MERN stack (MongoDB, Express.js, React.js, Node.js).
 
 ---
 
