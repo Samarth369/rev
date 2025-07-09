@@ -28,7 +28,7 @@ The backend provides RESTful APIs to fetch or create new pages and save content 
 
 ---
 
-#💡 Frontend Behaviour
+# 💡 Frontend Behaviour
 Clean Page UI:
 Displays the title and content in a clean, readable format.
 
