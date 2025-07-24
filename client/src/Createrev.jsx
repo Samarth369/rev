@@ -7,7 +7,7 @@ export default function Createrev() {
 
     const navigate = useNavigate()
 
-    const [ dp , setdp ] = useState(`https://raw.githubusercontent.com/Samarth369/rev/refs/heads/main/upload/image.png`)
+    const [ dp , setdp ] = useState(`https://github.com/Samarth369/rev/blob/main/img/img.png?raw=true`)
     const [ file , setfile ] = useState()
     const [ removeing , setremoveimg ] = useState(false)
 
