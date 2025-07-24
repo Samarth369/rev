@@ -50,7 +50,7 @@ export default function State () {
     return (
         <>
         <div className="state-bg">
-            <div className="download-brn"><button>Download</button></div>
+            {/* <div className="download-brn"><button>Download</button></div> */}
             <Showimg />
             <table className='state'>
                 <thead>
